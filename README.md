@@ -10,7 +10,7 @@ A stylized portfolio page of a GitHub user's repositories.
 ## Usage <a name = "usage"></a>
 
 1. Add query holding username of GitHub user
-    - eg. `https://www.edwardwibowo.com/portfolio?user=claby2`
+    - eg. https://www.edwardwibowo.com/portfolio?user=claby2
 
 This should display the user's repositories.
 
