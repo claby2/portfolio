@@ -3,7 +3,7 @@ var auth = document.getElementById('configAuth') ? true : false; // Checks if co
 if(auth) {
     console.log("You are using an API key.");
 } else {
-    console.log("You have no API key active and may be easily rate limited. \nRefer to source to see how you can specify an API key:\nhttps://github.com/claby2/portfolio/blob/master/README.md")
+    console.log("You have no API key active and may be easily rate limited. \nRefer to source to see how you can specify an API key:\nhttps://github.com/claby2/portfolio/blob/master/README.md");
 }
 
 const headers = new Headers();
