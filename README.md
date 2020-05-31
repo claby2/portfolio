@@ -23,7 +23,7 @@ To use your own API key, you may do the following:
 2. In `config.js` file, add:
     ```
     var config = {
-    KEY : 'INSERT_YOUR_KEY_HERE'
+        KEY : 'INSERT_YOUR_KEY_HERE'
     }
     ```
 3. Uncomment the line `<!-- <script src = "config.js" id = "configAuth"></script> -->` in `index.html`
