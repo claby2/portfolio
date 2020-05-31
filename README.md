@@ -16,7 +16,7 @@ This should display the user's repositories.
 
 ### API Key (optional)
 
-This application does not require an API key but you may supply one yourself to decrease the rate limit.
+This application does not require an API key but you may supply one yourself to raise the rate limit.
 
 To use your own API key, you may do the following:
 1. Create a file in the directory named `config.js`
