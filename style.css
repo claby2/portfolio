@@ -1,0 +1,44 @@
+@import url('https://rsms.me/inter/inter.css');
+html { font-family: 'Inter', sans-serif; }
+@supports (font-variation-settings: normal) {
+  html { font-family: 'Inter var', sans-serif; }
+}
+
+body {
+    font-family: 'Inter', sans-serif !important;
+    background-color: #31383F;
+    color: #FAFAFA;
+}
+
+#repoList {
+    display: grid;
+    grid-template-columns: auto auto;
+    justify-content: center;
+    grid-gap: 20px;
+}
+
+.repoDiv {
+    margin: 0;
+    padding: 20px;
+    width: 650px;
+    border-radius: 10px;
+    background-color: #272C32;
+    color: #FAFAFA;
+}
+
+.repoDiv a {
+    text-decoration: none;
+    color: #FAFAFA;
+}
+
+.repoDiv h3 { 
+    margin: 0;
+}
+
+.repoDetails {
+    display: flex;
+}
+
+.repoDetails * {
+    margin: 0 20px 0 0;
+}
