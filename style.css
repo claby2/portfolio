@@ -42,3 +42,18 @@ body {
 .repoDetails * {
     margin: 0 20px 0 0;
 }
+
+@media (max-width: 1500px) {
+    .repoDiv {
+        width: 40vw;
+    }
+}
+
+@media (max-width: 650px) {
+    #repoList {
+        grid-template-columns: auto;
+    }
+    .repoDiv {
+        width: 80vw;
+    }
+}
