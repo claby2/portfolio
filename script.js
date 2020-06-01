@@ -65,6 +65,7 @@ function appendRepo(repo) {
     nameLink.innerText = repo.name;
     nameLink.href = repo.html_url;
     nameLink.target = '_blank';
+    nameLink.rel = 'noreferrer';
     description.innerText = repo.description;
     language.innerText = repo.language;
     stars.innerText = numberWithCommas(repo.stargazers_count) + ' stars';
