@@ -26,6 +26,10 @@ body {
     color: #FAFAFA;
 }
 
+.repoDiv:hover {
+    box-shadow: 0 4px 8px 0 rgba(10, 10, 10, 0.7);
+}
+
 .repoDiv a {
     text-decoration: none;
     color: #FAFAFA;
