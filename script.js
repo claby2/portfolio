@@ -100,7 +100,7 @@ if(user === null) {
 }
 
 function displayRepos(repos) {
-    document.getElementById('repoList').innerText = '';
+    document.getElementById('repoList').innerText = ''; // Clear repoList
     for(let i = 0; i < repos.length; i++) {
         appendRepo(repos[i]);
     }
@@ -108,13 +108,13 @@ function displayRepos(repos) {
 
 document.getElementById('searchInput').addEventListener('keyup', ()=> {
     let input = document.getElementById('searchInput').value;
-    input = input.toLowerCase();
-    if(input === "") {
-        filteredReposArr = reposArr;
+    input = input.toLowerCase(); // Make search input lower case for uniformity
+    if(input === "") { // Check if search input has been cleared
+        filteredReposArr = reposArr; // If search input is empty, display all repos
     } else {
         filteredReposArr = [];
-        filteredReposArr = reposArr.filter((e => (e.name).toLowerCase().indexOf(input) != -1))
+        filteredReposArr = reposArr.filter((e => (e.name).toLowerCase().indexOf(input) != -1)); // Filter reeposArr based on search input
     }
 
-    displayRepos(filteredReposArr);
+    displayRepos(filteredReposArr); // Display filtered version of repo
 })
