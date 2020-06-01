@@ -1,3 +1,7 @@
+function numberWithCommas(x) { // https://stackoverflow.com/questions/2901102/how-to-print-a-number-with-commas-as-thousands-separators-in-javascript
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","); // Replace star and fork number with comma seperated
+}
+
 var auth = document.getElementById('configAuth') ? true : false; // Checks if config.js script tag is active (uncommented)
 
 if(auth) {
@@ -63,8 +67,8 @@ if(user === null) {
         nameLink.target = '_blank';
         description.innerText = repo.description;
         language.innerText = repo.language;
-        stars.innerText = repo.stargazers_count;
-        forks.innerText = repo.forks;
+        stars.innerText = numberWithCommas(repo.stargazers_count) + ' stars';
+        forks.innerText = numberWithCommas(repo.forks) + ' forks';
     
         name.appendChild(nameLink);
     
