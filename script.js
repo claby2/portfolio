@@ -18,14 +18,16 @@ if(auth) {
 
 const user = new URLSearchParams(window.location.search).get('user'); // Gets user based on query in URL
 
+var colorsObject; // Object stores colors.json which holds information for language color highlighting
+var filteredReposArr = [];
+var reposArr = [];
+
 if(user === null) {
     document.getElementById('title').innerText = 'user not specified'; // No user has been specified
     document.title = '/repos';
 } else {
     document.getElementById('title').innerText = user + '/repos';
     document.title = user + '/repos';
-    
-    var colorsObject; // Object stores colors.json which holds information for language color highlighting
     
     function getColorsObject() {
         var request = new XMLHttpRequest();
@@ -91,7 +93,28 @@ if(user === null) {
     
     fetchRepos(user).then(repos => {
         repos.forEach(repo => {
+            reposArr.push(repo);
             appendRepo(repo);
         })
     })
 }
+
+function displayRepos(repos) {
+    document.getElementById('repoList').innerText = '';
+    for(let i = 0; i < repos.length; i++) {
+        appendRepo(repos[i]);
+    }
+}
+
+document.getElementById('searchInput').addEventListener('keyup', ()=> {
+    let input = document.getElementById('searchInput').value;
+    input = input.toLowerCase();
+    if(input === "") {
+        filteredReposArr = reposArr;
+    } else {
+        filteredReposArr = [];
+        filteredReposArr = reposArr.filter((e => e.name.indexOf(input) != -1))
+    }
+
+    displayRepos(filteredReposArr);
+})
