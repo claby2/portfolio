@@ -56,10 +56,25 @@ body {
     margin: 0 0 20px 0;
 }
 
-#searchInput {
+#searchInput, #userSearchInput {
     font-family: 'Inter', sans-serif;
     border-radius: 15px;
     padding: 5px 10px 5px 10px;
+}
+
+#userSearchInput {
+    color: #FAFAFA;
+    border: 0;
+    background-color: #272727;
+    border-bottom: 2px solid #212121;
+    font-size: 1.2em;
+}
+
+#userSearch {
+    position: absolute;
+    top: 20px;
+    right: 5px;
+    display: flex;
 }
 
 @media (max-width: 1500px) {

@@ -22,81 +22,24 @@ var colorsObject; // Object stores colors.json which holds information for langu
 var filteredReposArr = [];
 var reposArr = [];
 
-if(user === null) {
-    document.getElementById('title').innerText = 'user not specified'; // No user has been specified
-    document.title = '/repos';
-} else {
-    document.getElementById('title').innerText = user + '/repos';
-    document.title = user + '/repos';
-    
-    function getColorsObject() {
-        var request = new XMLHttpRequest();
-        request.open("GET", "./colors.json", false);
-        request.send(null);
-        colorsObject = JSON.parse(request.responseText);
-    }
-    
-    getColorsObject(); // Read and store colors.json
-    
-    function fetchRepos(user) {
-        if(auth) { // Pass API key in headers if able
-            return fetch('https://api.github.com/users/' + user + '/repos', {
-                method: 'GET',
-                headers: headers,
-            })
-            .then(res => res.json());
-        } else { // No API key specified
-            return fetch('https://api.github.com/users/' + user + '/repos')
-            .then(res => res.json());
-        }
-    }
-    
-    function appendRepo(repo) {
-        let div = document.createElement('div');
-        div.classList.add('repoDiv')
-        let details = document.createElement('div');
-        details.classList.add('repoDetails');
-    
-        let name = document.createElement('h3');
-        let nameLink = document.createElement('a');
-        let description = document.createElement('p');
-        let language = document.createElement('p');
-        let stars = document.createElement('p');
-        let forks = document.createElement('p');
-    
-        nameLink.innerText = repo.name;
-        nameLink.href = repo.html_url;
-        nameLink.target = '_blank';
-        description.innerText = repo.description;
-        language.innerText = repo.language;
-        stars.innerText = numberWithCommas(repo.stargazers_count) + ' stars';
-        forks.innerText = numberWithCommas(repo.forks) + ' forks';
-    
-        name.appendChild(nameLink);
-    
-        if(repo.language !== null) {
-            if(colorsObject[repo.language].hasOwnProperty('color')) language.setAttribute(
-                'style', 
-                'color: ' + colorsObject[repo.language]['color'] + '; filter: brightness(200%);' // Set the language color if applicable and add brightness filter for dark mode
-            );
-            details.appendChild(language);
-        }
-        if(repo.stargazers_count) details.appendChild(stars);
-        if(repo.forks) details.appendChild(forks);
-    
-        div.appendChild(name);
-        div.appendChild(description);
-        div.appendChild(details);
-    
-        document.getElementById('repoList').appendChild(div);
-    }
-    
-    fetchRepos(user).then(repos => {
-        repos.forEach(repo => {
-            reposArr.push(repo);
-            appendRepo(repo);
+function getColorsObject() {
+    var request = new XMLHttpRequest();
+    request.open("GET", "./colors.json", false);
+    request.send(null);
+    colorsObject = JSON.parse(request.responseText);
+}
+
+function fetchRepos(user) {
+    if(auth) { // Pass API key in headers if able
+        return fetch('https://api.github.com/users/' + user + '/repos', {
+            method: 'GET',
+            headers: headers,
         })
-    })
+        .then(res => res.json());
+    } else { // No API key specified
+        return fetch('https://api.github.com/users/' + user + '/repos')
+        .then(res => res.json());
+    }
 }
 
 function displayRepos(repos) {
@@ -104,6 +47,70 @@ function displayRepos(repos) {
     for(let i = 0; i < repos.length; i++) {
         appendRepo(repos[i]);
     }
+}
+
+function appendRepo(repo) {
+    let div = document.createElement('div');
+    div.classList.add('repoDiv')
+    let details = document.createElement('div');
+    details.classList.add('repoDetails');
+
+    let name = document.createElement('h3');
+    let nameLink = document.createElement('a');
+    let description = document.createElement('p');
+    let language = document.createElement('p');
+    let stars = document.createElement('p');
+    let forks = document.createElement('p');
+
+    nameLink.innerText = repo.name;
+    nameLink.href = repo.html_url;
+    nameLink.target = '_blank';
+    description.innerText = repo.description;
+    language.innerText = repo.language;
+    stars.innerText = numberWithCommas(repo.stargazers_count) + ' stars';
+    forks.innerText = numberWithCommas(repo.forks) + ' forks';
+
+    name.appendChild(nameLink);
+
+    if(repo.language !== null) {
+        if(colorsObject[repo.language].hasOwnProperty('color')) language.setAttribute(
+            'style', 
+            'color: ' + colorsObject[repo.language]['color'] + '; filter: brightness(200%);' // Set the language color if applicable and add brightness filter for dark mode
+        );
+        details.appendChild(language);
+    }
+    if(repo.stargazers_count) details.appendChild(stars);
+    if(repo.forks) details.appendChild(forks);
+
+    div.appendChild(name);
+    div.appendChild(description);
+    div.appendChild(details);
+
+    document.getElementById('repoList').appendChild(div);
+}
+
+document.getElementById('userSearchInput').addEventListener('keydown', function(e) {
+    if(e.key === 'Enter') {
+        window.location.href = location.protocol + '//' + location.host + location.pathname +  '?user=' + userSearchInput.value;
+    }
+})
+
+if(user === null) {
+    document.getElementById('searchBar').style.display = 'none';
+    document.getElementById('title').innerText = 'user not specified'; // No user has been specified
+    document.title = '/repos';
+} else {
+    document.getElementById('title').innerText = user + '/repos';
+    document.title = user + '/repos';
+    
+    getColorsObject(); // Read and store colors.json
+    
+    fetchRepos(user).then(repos => {
+        repos.forEach(repo => {
+            reposArr.push(repo);
+            appendRepo(repo);
+        })
+    })
 }
 
 document.getElementById('searchInput').addEventListener('keyup', ()=> {
@@ -117,4 +124,4 @@ document.getElementById('searchInput').addEventListener('keyup', ()=> {
     }
 
     displayRepos(filteredReposArr); // Display filtered version of repo
-})
+});
