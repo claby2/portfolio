@@ -113,7 +113,7 @@ document.getElementById('searchInput').addEventListener('keyup', ()=> {
         filteredReposArr = reposArr;
     } else {
         filteredReposArr = [];
-        filteredReposArr = reposArr.filter((e => e.name.indexOf(input) != -1))
+        filteredReposArr = reposArr.filter((e => (e.name).toLowerCase().indexOf(input) != -1))
     }
 
     displayRepos(filteredReposArr);
