@@ -19,8 +19,8 @@ if(auth) {
 const user = new URLSearchParams(window.location.search).get('user'); // Gets user based on query in URL
 
 var colorsObject; // Object stores colors.json which holds information for language color highlighting
-var filteredReposArr = [];
-var reposArr = [];
+var reposArr = []; // Stores all repos from user returned from API
+var filteredReposArr = []; // Store all repos from user from API after being filtered through search bar
 
 function getColorsObject() {
     var request = new XMLHttpRequest();
@@ -91,7 +91,7 @@ function appendRepo(repo) {
 
 document.getElementById('userSearchInput').addEventListener('keydown', function(e) {
     if(e.key === 'Enter') {
-        window.location.href = location.protocol + '//' + location.host + location.pathname +  '?user=' + userSearchInput.value;
+        window.location.href = location.protocol + '//' + location.host + location.pathname + '?user=' + userSearchInput.value; // Redirect user to user page, responsive to domain and if parameters are active or not
     }
 })
 
